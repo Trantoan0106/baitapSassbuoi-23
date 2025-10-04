@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Điện Thoại Shop - Home</title>
+    <meta
+      name="description"
+      content="Intelligence SmartPhone — We will bring you the best experience. Join our community."
+    />
+    <style>
+      :root {
+        --accent: #6366f1;
+        --accent-hover: #4f46e5;
+        --accent-soft: #a78bfa;
+        --orb-start: #6366f1;
+        --orb-end: #8b5cf6;
+
+        --brand-title-start: #c7d2fe;
+        --brand-title-mid: #a78bfa;
+        --brand-title-end: #60a5fa;
+
+        --bg-page: #000000;
+        --bg-card: #1e293b;
+        --text-primary: #ffffff;
+        --text-secondary: #d1d5db;
+        --text-brand-muted: #94a3b8;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, Roboto, Arial, sans-serif;
+        background: var(--bg-page);
+        color: var(--text-primary);
+      }
+
+      .container {
+        min-height: 100vh;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: var(--bg-page);
+      }
+      .cosmos-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: radial-gradient(
+            ellipse 80% 60% at 50% 0%,
+            rgba(99, 102, 241, 0.24) 0%,
+            rgba(99, 102, 241, 0.12) 35%,
+            rgba(99, 102, 241, 0.04) 60%,
+            transparent 75%
+          ),
+          var(--bg-page);
+      }
+
+      #twinkles {
+        position: absolute;
+        inset: 0;
+        z-index: 0.5;
+        pointer-events: none;
+      }
+
+      .cta-wrap {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 900px;
+        border-radius: 24px;
+        text-align: center;
+        padding: 96px 24px;
+        overflow: hidden;
+        border: 1px solid transparent;
+        background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+          linear-gradient(
+              135deg,
+              rgba(99, 102, 241, 0.6),
+              rgba(139, 92, 246, 0.4)
+            )
+            border-box;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+        transition: transform 0.2s ease, box-shadow 0.25s ease;
+      }
+      .cta-wrap:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+      }
+
+      .cta-wrap::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            60% 60% at 50% 40%,
+            rgba(99, 102, 241, 0.12),
+            transparent 70%
+          ),
+          radial-gradient(
+            40% 40% at 20% 20%,
+            rgba(139, 92, 246, 0.08),
+            transparent 70%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+      .cta-wrap::after {
+        content: "";
+        position: absolute;
+        inset: -15% -15% auto -15%;
+        height: 60%;
+        background: radial-gradient(
+          60% 70% at 50% 50%,
+          rgba(99, 102, 241, 0.18),
+          transparent 70%
+        );
+        filter: blur(22px);
+        opacity: 0.6;
+        z-index: 0;
+        animation: breath 6s ease-in-out infinite;
+      }
+      @keyframes breath {
+        0%,
+        100% {
+          opacity: 0.45;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.75;
+          transform: scale(1.04);
+        }
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 18px;
+        color: var(--text-brand-muted);
+        position: relative;
+        z-index: 1;
+      }
+      .brand .logo svg {
+        width: 64px;
+        height: 60px;
+        display: block;
+        filter: drop-shadow(0 6px 16px rgba(99, 102, 241, 0.25));
+      }
+      .wordmark {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .wordmark .title {
+        font-size: clamp(1.9rem, 2.4vw + 1rem, 2.6rem);
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: 0.3px;
+        margin: 0;
+        background: linear-gradient(
+          90deg,
+          var(--brand-title-start) 0%,
+          var(--brand-title-mid) 45%,
+          var(--brand-title-end) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% 100%;
+        animation: titleShift 12s linear infinite;
+      }
+      @keyframes titleShift {
+        0% {
+          background-position: 0% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+      .wordmark .subtitle {
+        margin-top: 2px;
+        font-size: clamp(0.95rem, 0.2vw + 0.85rem, 1.05rem);
+        font-weight: 700;
+        color: #c7d2fecc;
+        line-height: 1.5;
+        letter-spacing: 0.2px;
+      }
+
+      .cta-title,
+      .cta-desc {
+        display: none;
+      }
+
+      .cta-avatars {
+        margin-top: 28px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 4px 0;
+        position: relative;
+        z-index: 1;
+      }
+      .avatar-stack {
+        display: inline-block;
+        white-space: nowrap;
+      }
+      .avatar-stack img {
+        height: 40px;
+        width: 40px;
+        border-radius: 9999px;
+        display: inline-block;
+        position: relative;
+        box-shadow: 0 0 0 2px #fff;
+        margin-left: -8px;
+        animation: floatUp 4.8s ease-in-out infinite;
+      }
+      .avatar-stack img:first-child {
+        margin-left: 0;
+      }
+      @keyframes floatUp {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+      .avatar-stack img:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .avatar-stack img:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      .avatar-stack img:nth-child(4) {
+        animation-delay: 0.9s;
+      }
+
+      .cta-join-note {
+        margin-left: 8px;
+        font-weight: 700;
+        font-style: italic;
+        color: var(--accent-soft);
+        white-space: nowrap;
+      }
+
+      .cta-actions {
+        margin-top: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-primary {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 16px 24px;
+        font-weight: 700;
+        font-size: 1rem;
+        border: 0;
+        border-radius: 12px;
+        color: #fff;
+        background: var(--accent);
+        box-shadow: 0 8px 28px rgba(99, 102, 241, 0.45),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.15s ease, transform 0.15s ease,
+          box-shadow 0.15s ease;
+        overflow: hidden;
+      }
+      .btn-primary:hover {
+        background: var(--accent-hover);
+        box-shadow: 0 10px 32px rgba(79, 70, 229, 0.45);
+        transform: translateY(-1px);
+      }
+      .btn-primary:focus-visible {
+        outline: 2px solid var(--accent-hover);
+        outline-offset: 2px;
+      }
+      .btn-icon {
+        height: 20px;
+        width: 20px;
+        margin-right: -2px;
+      }
+      .btn-primary .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        background: rgba(255, 255, 255, 0.35);
+        pointer-events: none;
+        width: 12px;
+        height: 12px;
+        animation: ripple 0.6s ease-out forwards;
+      }
+      @keyframes ripple {
+        to {
+          transform: scale(20);
+          opacity: 0;
+        }
+      }
+
+      .cta-orb {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        width: 72rem;
+        height: 72rem;
+        pointer-events: none;
+        mask-image: radial-gradient(closest-side, white, transparent);
+        -webkit-mask-image: radial-gradient(closest-side, white, transparent);
+        opacity: 0.7;
+      }
+
+      @media (max-width: 480px) {
+        .cta-wrap {
+          padding: 56px 20px;
+          border-radius: 18px;
+          max-width: 840px;
+        }
+        .cta-orb {
+          width: 46rem;
+          height: 46rem;
+          opacity: 0.55;
+        }
+        .brand .logo svg {
+          width: 56px;
+          height: 52px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .btn-primary,
+        .cta-wrap {
+          transition: none;
+        }
+        .cta-orb {
+          opacity: 0.5;
+        }
+        .wordmark .title {
+          animation: none;
+        }
+        .avatar-stack img {
+          animation: none;
+        }
+        .cta-wrap::after {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cosmos-bg"></div>
+
+      <canvas id="twinkles" aria-hidden="true"></canvas>
+
+      <main class="cta-wrap" role="main" aria-labelledby="brand-title">
+        <header class="brand">
+          <a class="logo" href="#" aria-label="Go to home">
+            <svg
+              viewBox="0 0 43 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M3.30396 17.1323C3.71066 15.3021 5.33391 14 7.20871 14H12L8.00002 32H4.98649C2.4275 32 0.526616 29.6303 1.08174 27.1323L3.30396 17.1323Z"
+                fill="#FFC228"
+              />
+              <path
+                d="M39.2852 8H21.2861L20.6777 10.8384C20.2824 12.6825 18.6526 14 16.7666 14H12L14.3216 3.16214C14.7167 1.31774 16.3467 0 18.2329 0H36.0513C38.5978 0 40.496 2.34793 39.9626 4.83792L39.2852 8Z"
+                fill="#FB315D"
+              />
+              <path
+                d="M30.9627 36.8379C30.5676 38.6823 28.9377 40 27.0514 40H11.233C8.68648 40 6.78828 37.6521 7.32172 35.1621L7.99914 32H31.9991L30.9627 36.8379Z"
+                fill="#07E0B0"
+              />
+              <path
+                d="M38.6269 17C41.2292 17 43.1386 19.4456 42.5075 21.9701L40.7575 28.9701C40.3123 30.7508 38.7124 32 36.8769 32H32L33.75 25H14L15.0364 20.1621C15.4316 18.3177 17.0615 17 18.9477 17H38.6269Z"
+                fill="#6F3BFD"
+              />
+            </svg>
+          </a>
+          <div class="wordmark">
+            <h1 id="brand-title" class="title">Intelligence SmartPhone</h1>
+            <p class="subtitle">We will bring you the best experience</p>
+          </div>
+        </header>
+
+        <div class="cta-avatars" aria-label="Community members">
+          <div class="avatar-stack">
+            <img
+              src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
+              alt="iPhone 15 Pro - Titanium"
+              loading="lazy"
+            />
+            <img
+              src="https://cdn.tgdd.vn/Products/Images/42/217536/samsung-galaxy-m51-trang-new-600x600-600x600.jpg"
+              alt="Samsung Galaxy S24 Ultra"
+              loading="lazy"
+            />
+            <img
+              src="https://cdn.tgdd.vn/Products/Images/42/217536/samsung-galaxy-m51-trang-new-600x600-600x600.jpg"
+              alt="Redmi Note 13 Pro"
+              loading="lazy"
+            />
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROBfZtUuxFSq1NBOy5crptkbwtGXWX89LN6Q&s"
+              alt="OPPO Reno12"
+              loading="lazy"
+            />
+          </div>
+          <span class="cta-join-note">Bestsellers this week</span>
+        </div>
+
+        <div class="cta-actions">
+          <a
+            class="btn-primary"
+            href="./customer.html"
+            aria-label="Join now – go to users page"
+          >
+            Join Now
+            <svg
+              class="btn-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.72 7.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 010 1.06l-3.75 3.75a.75.75 0 11-1.06-1.06l2.47-2.47H3a.75.75 0 010-1.5h16.19l-2.47-2.47a.75.75 0 010-1.06z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </a>
+        </div>
+
+        <svg viewBox="0 0 1024 1024" class="cta-orb" aria-hidden="true">
+          <defs>
+            <radialGradient id="orb-grad">
+              <stop stop-color="var(--orb-start)"></stop>
+              <stop offset="1" stop-color="var(--orb-end)"></stop>
+            </radialGradient>
+          </defs>
+          <circle cx="512" cy="512" r="512" fill="url(#orb-grad)"></circle>
+        </svg>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        const btn = document.querySelector(".btn-primary");
+        if (!btn) return;
+        btn.addEventListener("click", function (e) {
+          const r = document.createElement("span");
+          r.className = "ripple";
+          const rect = this.getBoundingClientRect();
+          r.style.left = e.clientX - rect.left + "px";
+          r.style.top = e.clientY - rect.top + "px";
+          this.appendChild(r);
+          setTimeout(() => r.remove(), 650);
+        });
+      })();
+
+      (function () {
+        const c = document.getElementById("twinkles");
+        if (!c) return;
+        const ctx = c.getContext("2d");
+        let w,
+          h,
+          stars = [];
+        function resize() {
+          w = c.width = window.innerWidth;
+          h = c.height = window.innerHeight;
+          makeStars();
+        }
+        function makeStars() {
+          const count = Math.min(80, Math.round((w * h) / 20000));
+          stars.length = 0;
+          for (let i = 0; i < count; i++) {
+            stars.push({
+              x: Math.random() * w,
+              y: Math.random() * h * 0.9,
+              r: Math.random() * 1.2 + 0.2,
+              p: Math.random() * Math.PI * 2,
+              s: 0.6 + Math.random() * 0.8,
+            });
+          }
+        }
+        function draw(t) {
+          ctx.clearRect(0, 0, w, h);
+          for (const s of stars) {
+            const a = 0.25 + Math.abs(Math.sin(t * 0.001 * s.s + s.p)) * 0.45;
+            ctx.fillStyle = `rgba(167,139,250,${a})`;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          requestAnimationFrame(draw);
+        }
+        window.addEventListener("resize", resize);
+        resize();
+        requestAnimationFrame(draw);
+      })();
+    </script>
+  </body>
+</html>

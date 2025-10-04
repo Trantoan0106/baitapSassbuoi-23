@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+    <link rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+      integrity="sha512-SnH5WK+bZxgPWZ8+...==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<style>
+.table { border-collapse: collapse; width: 100%; }
+.table th, .table td { padding: 12px 16px; vertical-align: middle; }
+.table thead th, .table tbody td { text-align: left; }
+</style>
+    
+
+    <link rel="stylesheet" href="/Style/main.css">
+</head>
+<body class="admin">
+    
+<header class="admin-topbar" role="banner">
+    <div class="brand">
+<span class="logo">
+    <svg width="43" height="40" viewBox="0 0 43 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.30396 17.1323C3.71066 15.3021 5.33391 14 7.20871 14H12L8.00002 32H4.98649C2.4275 32 0.526616 29.6303 1.08174 27.1323L3.30396 17.1323Z" fill="#FFC228"></path>
+<path d="M39.2852 8H21.2861L20.6777 10.8384C20.2824 12.6825 18.6526 14 16.7666 14H12L14.3216 3.16214C14.7167 1.31774 16.3467 0 18.2329 0H36.0513C38.5978 0 40.496 2.34793 39.9626 4.83792L39.2852 8Z" fill="#FB315D"></path>
+<path d="M30.9627 36.8379C30.5676 38.6823 28.9377 40 27.0514 40H11.233C8.68648 40 6.78828 37.6521 7.32172 35.1621L7.99914 32H31.9991L30.9627 36.8379Z" fill="#07E0B0"></path>
+<path d="M38.6269 17C41.2292 17 43.1386 19.4456 42.5075 21.9701L40.7575 28.9701C40.3123 30.7508 38.7124 32 36.8769 32H32L33.75 25H14L15.0364 20.1621C15.4316 18.3177 17.0615 17 18.9477 17H38.6269Z" fill="#6F3BFD"></path>
+</svg>
+</span>
+<div class="wordmark">
+<span class="title">Intelligence</span>
+<span class="subtitle">SmartPhone</span>
+</div>
+    </div>
+
+
+<nav class="magic-nav" role="tablist" aria-label="primary">
+<button class="nav-item is-active " role="tab" aria-selected="true" data-view="home">
+    <i class="fa-solid fa-house"></i>
+    <span>Home</span>
+</button>
+<button class="nav-item " role="tab" aria-selected="false" data-view="users">
+    <i class="fa-solid fa-user"></i>
+    <span>Users</span>
+</button>
+<button class="nav-item " role="tab" aria-selected="false" data-view="messages">
+    <i class="fa-solid fa-comment-dots"></i>
+    <span>Messages</span>
+</button>
+<button class="nav-item" role="tab" aria-selected="false" data-view="settings">
+    <i class="fa-solid fa-gear "></i>
+    <span>Settings</span>
+</button>
+<span class="indicator" aria-hidden="true"></span>
+</nav>
+
+
+
+<div class="action">
+<div class="search-fill">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input type="search" placeholder="Bạn muốn tìm gì nè hihi.....">
+</div>
+<button class="icon-btn" aria-label="Add">
+    <i class="fa-solid fa-plus"></i>
+</button>
+<img class="avatar" src="https://i.pravatar.cc/40" alt="Your profile" />
+</div>
+</header>
+
+<main>
+
+<section id="view-home" class="panel">
+    <div class="page-bar">
+      <h2>Dashboard</h2>
+      <div class="actions">
+        <button class="btn" data-open="md-product">New</button>
+      </div>
+    </div>
+    <div class="kpi-grid">
+      <article class="kpi"><i class="fa-solid fa-box"></i><div><h4>Products</h4><p>128</p></div></article>
+      <article class="kpi"><i class="fa-solid fa-bag-shopping"></i><div><h4>Orders</h4><p>356</p></div></article>
+      <article class="kpi"><i class="fa-solid fa-warehouse"></i><div><h4>Inventory</h4><p>1,245</p></div></article>
+      <article class="kpi"><i class="fa-solid fa-dollar-sign"></i><div><h4>Revenue</h4><p>$23,420</p></div></article>
+    </div>
+   
+
+
+
+<table class="table" style="width:100%; border-collapse: collapse; margin-top:16px">
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Price</th><th>Screen</th>
+        <th>Type</th><th>Image</th><th>Description</th><th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+
+  </section>
+
+  
+  <section id="view-users" class="panel" hidden>
+    <div class="page-bar"><h2>Users</h2></div>
+    <p class="muted">Users table sẽ đặt ở đây.</p>
+  </section>
+
+  
+  <section id="view-messages" class="panel" hidden>
+    <div class="page-bar"><h2>Messages</h2></div>
+    <p class="muted">Danh sách tin nhắn/hoạt động.</p>
+  </section>
+
+  
+  <section id="view-settings" class="panel" hidden>
+    <div class="page-bar"><h2>Settings</h2></div>
+    <p class="muted">Cấu hình hệ thống.</p>
+  </section>
+</main>
+
+
+
+
+<div class="modal" id="md-product" hidden>
+  <div class="modal-dialog">
+    <header>
+      <h3 id="md-title">Add product</h3>
+      <button class="icon-btn close" type="button">&times;</button>
+    </header>
+    <form class="form-grid" id="frm-product">
+      <label>
+        <span >Name*</span>
+        <input class="name" name="name" required></label>
+      <label><span>Price*</span>
+        <input class="price" name="price" type="number" min="1" required></label>
+      <label><span>Screen*</span><input class="screen" name="screen" required></label>
+      <label><span>Type*</span>
+        <select class="type" name="type" required>
+          <option value="">Select…</option>
+          <option>iphone</option>
+          <option>samsung</option>
+        </select>
+      </label>
+
+      <label class="full"><span>Image URL*</span><input class="img" name="img" type="url" required></label>
+      <label class="full"><span>Description*</span><textarea class="desc" name="desc" rows="3" required></textarea></label>
+      <div class="form-actions full">
+        <button class="btn-primary" type="submit">Save</button>
+        <button class="btn-ghost" type="button" data-close>Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+
+const nav   = document.querySelector('.magic-nav');
+  const items = nav.querySelectorAll('.nav-item');
+  const ind   = nav.querySelector('.indicator');
+
+
+const BLEED_X = 10;   
+  const BLEED_Y = 0;
+
+
+  function move(el){
+    
+    const w = el.offsetWidth  + BLEED_X * 2;
+    const x = el.offsetLeft   - BLEED_X;
+
+    ind.style.width     = w + 'px';
+    ind.style.transform = `translateX(${x}px)`;
+
+   
+    if (BLEED_Y){
+      ind.style.height = (el.offsetHeight + BLEED_Y*2) + 'px';
+      ind.style.top    = (parseFloat(getComputedStyle(ind).top) - BLEED_Y) + 'px';
+    }
+
+   
+    items.forEach(btn => {
+      const on = btn === el;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
+ 
+  move(nav.querySelector('.nav-item.is-active') || items[0]);
+
+  
+  nav.addEventListener('click', e => {
+    const btn = e.target.closest('.nav-item');
+    if (btn) move(btn);
+  });
+
+ 
+  window.addEventListener('resize', () =>
+    move(nav.querySelector('.nav-item.is-active') || items[0])
+  );
+
+
+
+const viewMap = {
+    home:     document.getElementById('view-home'),
+    users:    document.getElementById('view-users'),
+    messages: document.getElementById('view-messages'),
+    settings: document.getElementById('view-settings'),
+  };
+
+  function showView(name){
+    Object.values(viewMap).forEach(sec => sec.hidden = true);
+    (viewMap[name] || viewMap.home).hidden = false;
+  }
+
+  
+  document.querySelector('.magic-nav').addEventListener('click', e=>{
+    const btn = e.target.closest('.nav-item');
+    if(!btn) return;
+    const view = btn.dataset.view;
+    if(view) showView(view);
+  });
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js" integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="../../Shared/Api/admin.api.js"></script>
+
+<script src="./Controllers/main.js"></script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</body>
+</html>

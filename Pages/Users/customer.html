@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cửa hàng - Customer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="/Style/style.css" />
+  </head>
+  <body>
+    <div class="bg-slideshow">
+      <div class="bg"></div>
+      <div class="bg"></div>
+      <div class="bg"></div>
+      <div class="bg"></div>
+    </div>
+    <div class="cosmos-bg"></div>
+    <canvas id="twinkles"></canvas>
+
+    <!-- NAV -->
+    <header class="nav">
+      <div class="nav-inner">
+        <div class="brand">
+          <svg
+            viewBox="0 0 43 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.3 17.1C3.7 15.3 5.3 14 7.2 14H12L8 32H5c-2.6 0-4.5-2.4-3.9-4.9L3.3 17.1Z"
+              fill="#FFC228"
+            />
+            <path
+              d="M39.3 8H21.3l-.6 2.8c-.4 1.8-2 3.2-3.9 3.2H12l2.3-10.8C14.7 1.3 16.3 0 18.2 0h17.8c2.6 0 4.5 2.3 4 4.8L39.3 8Z"
+              fill="#FB315D"
+            />
+            <path
+              d="M31 36.8c-.4 1.9-2 3.2-3.9 3.2H11.2c-2.6 0-4.5-2.3-3.9-4.8L8 32h24l-1 4.8Z"
+              fill="#07E0B0"
+            />
+            <path
+              d="M38.6 17c2.6 0 4.5 2.4 3.9 5L40.8 29c-.5 1.8-2.1 3-4 3H32l1.8-7h-20l1.3-4.8c.4-1.8 2-3.2 3.9-3.2h19.6Z"
+              fill="#6F3BFD"
+            />
+          </svg>
+          <span>Intelligence SmartPhone</span>
+        </div>
+
+        <div class="search-area">
+          <input
+            id="searchInput"
+            placeholder="Tìm sản phẩm, ví dụ: Iphone, Samsung, Redmi Xiaomi..."
+          />
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
+
+        <div class="tools">
+          <select id="categorySelect"></select>
+          <select id="sortSelect">
+            <option value="">Sắp xếp</option>
+            <option value="price-asc">Giá: thấp → cao</option>
+            <option value="price-desc">Giá: cao → thấp</option>
+          </select>
+          <button
+            id="cartBtn"
+            class="cart-btn"
+            onclick="shop.toggleCartSidebar(true)"
+          >
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            Giỏ (<span id="cartCount"></span>)
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <style>
+      :root {
+        --bg-page: #000000; /* 🎨 màu nền gốc */
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      .cosmos-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: radial-gradient(
+            ellipse 80% 60% at 50% 0%,
+            rgba(99, 102, 241, 0.24) 0%,
+            rgba(99, 102, 241, 0.12) 35%,
+            rgba(99, 102, 241, 0.04) 60%,
+            transparent 75%
+          ),
+          var(--bg-page);
+      }
+      #twinkles {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+      }
+    </style>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <h1>CÔNG NGHỆ MỚI - HIỆN ĐẠI MỚI</h1>
+        <a href="#products" class="btn btn-cta pink">Mua ngay</a>
+      </div>
+      <div class="hero-right">
+        <img src="/assets/picture14.jpg" />
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <main class="container" id="products">
+      <h2 class="section-title">Sản phẩm nổi bật</h2>
+      <div id="productList" class="grid"></div>
+    </main>
+
+    <!-- CART SIDEBAR -->
+
+    <aside id="cartSidebar" class="cart-sidebar">
+      <div class="cart-head">
+        <h3>Giỏ hàng</h3>
+        <button id="cartClose" onclick="shop.toggleCartSidebar(false)">
+          ✕
+        </button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+
+      <!-- Tạm tính -->
+      <div id="cartSummary" class="cart-summary">
+        <p>
+          Tạm tính (<span id="cartCountSummary">0</span> sản phẩm):
+          <strong id="cartTotal">0₫</strong>
+        </p>
+      </div>
+
+      <!-- Hình thức thanh toán -->
+      <div class="cart-payment">
+        <h4>Hình thức thanh toán</h4>
+        <label>
+          <input type="radio" name="payment" value="cod" checked />
+          Thanh toán tiền mặt khi nhận hàng
+        </label>
+        <label>
+          <input type="radio" name="payment" value="bank" />
+          Chuyển khoản ngân hàng
+        </label>
+      </div>
+
+      <!-- Chính sách -->
+      <div class="cart-policy">
+        <label>
+          <input type="checkbox" id="policyCheck" />
+          Tôi đồng ý với <a href="#">Chính sách xử lý dữ liệu cá nhân</a>
+        </label>
+      </div>
+
+      <!-- Nút đặt hàng -->
+      <div class="cart-actions">
+        <button id="checkoutBtn" class="btn-order" disabled>Đặt hàng</button>
+      </div>
+    </aside>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="modal" class="modal">
+      <div class="modal-body">
+        <button id="modalClose" class="modal-close">✕</button>
+        <div class="modal-left">
+          <img id="modalImg" src="" alt="product" />
+        </div>
+        <div class="modal-right">
+          <h2 id="modalTitle"></h2>
+          <p id="modalPrice" class="modal-price"></p>
+          <p id="modalDesc"></p>
+          <button id="modalAddBtn" class="btn btn-primary">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initShop } from "./Controllers/customerController.js";
+      // mount modal close / cart toggle behavior are in controller; just init
+      window.addEventListener("DOMContentLoaded", () => initShop());
+    </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js" integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+      (function () {
+        const c = document.getElementById("twinkles");
+        if (!c) return;
+        const ctx = c.getContext("2d");
+        let w,
+          h,
+          stars = [];
+
+        function resize() {
+          w = c.width = window.innerWidth;
+          h = c.height = window.innerHeight;
+          makeStars();
+        }
+        function makeStars() {
+          const count = Math.min(150, Math.round((w * h) / 12000));
+          stars.length = 0;
+          for (let i = 0; i < count; i++) {
+            stars.push({
+              x: Math.random() * w,
+              y: Math.random() * h,
+              r: Math.random() * 1.5 + 0.5,
+              p: Math.random() * Math.PI * 2,
+              s: 0.8 + Math.random() * 1.2,
+            });
+          }
+        }
+        function draw(t) {
+          ctx.clearRect(0, 0, w, h);
+          for (const s of stars) {
+            const a = 0.3 + Math.abs(Math.sin(t * 0.001 * s.s + s.p)) * 0.7;
+            ctx.fillStyle = `rgba(255,255,255,${a})`;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+        requestAnimationFrame(draw);
+      })();
+    </script>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h4>Hỗ trợ khách hàng</h4>
+          <p>Hotline: <a href="tel:1900xxxx">1900 xxxx</a></p>
+          <p><a href="#">Các câu hỏi thường gặp</a></p>
+          <p><a href="#">Hướng dẫn đặt hàng</a></p>
+          <p><a href="#">Chính sách đổi trả</a></p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Về chúng tôi</h4>
+          <p><a href="#">Giới thiệu</a></p>
+          <p><a href="#">Tuyển dụng</a></p>
+          <p><a href="#">Liên hệ</a></p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Kết nối</h4>
+          <div class="social-links">
+            <a href="https://www.facebook.com/CellphoneSVietnam"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="https://www.instagram.com/cellphonesvn/#"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="https://www.tiktok.com/@cellphones.official"
+              ><i class="fa-brands fa-tiktok"></i
+            ></a>
+        
+          </div>
+
+          <!-- vd: link tới -->
+        </div>
+
+        <div class="footer-col">
+          <h4>Đăng ký nhận tin</h4>
+          <form class="newsletter">
+            <input type="email" placeholder="Email của bạn" required />
+            <button type="submit">Đăng ký</button>
+          </form>
+          <div class="app-links">
+            <div>
+              <a href="https://www.apple.com/app-store/" target="_blank"
+                >AppStore</a
+              >
+            </div>
+
+            <div>
+              <a
+                href="https://play.google.com/store/games?device=windows&pli=1"
+                target="_blank"
+                >Google Play</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 Intelligence SmartPhone. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
